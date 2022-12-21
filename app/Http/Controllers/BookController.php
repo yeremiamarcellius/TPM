@@ -12,11 +12,18 @@ class BookController extends Controller
     }
 
     public function store(Request $request){
+
+        $extension = $request->file('image')->getClientOriginalExtension();
+        // $filename = $request->file('image')->getClientOriginalName();
+        $filename = $request->Judul.'_'.$request->Author.'.'.$extension;
+        $request->file('image')->storeAs('/public/Book/', $filename);
+
         Book::create([
             'Judul' => $request->Judul,
             'PublishDate' => $request->PublishDate,
             'Penulis' => $request->Author,
-            'Stock' => $request->Stock
+            'Stock' => $request->Stock,
+            'image' => $filename
         ]);
 
         //  'nama dari model' => $request->name dari form
@@ -35,5 +42,34 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
 
         return view('showBook', compact('book'));
+    }
+
+    public function edit($id){
+        $book = Book::findOrFail($id);
+
+        return view('editBook', compact('book'));
+    }
+
+    public function update(Request $request, $id){
+        $extension = $request->file('image')->getClientOriginalExtension();
+        // $filename = $request->file('image')->getClientOriginalName();
+        $filename = $request->Judul.'_'.$request->Author.'.'.$extension;
+        $request->file('image')->storeAs('/public/Book/', $filename);
+
+        Book::findOrFail($id)->update([
+            'Judul' => $request->title,
+            'PublishDate' => $request->publishDate,
+            'Stock' => $request->stock,
+            'Penulis' => $request->author,
+            'image' => $filename
+        ]);
+
+        return redirect('/home');
+    }
+
+    public function delete($id){
+        Book::destroy($id);
+
+        return redirect('/home');
     }
 }

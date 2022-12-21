@@ -13,6 +13,7 @@ class Book extends Model
         'Judul',
         'Penulis',
         'Stock',
-        'PublishDate'
+        'PublishDate',
+        'image'
     ];
 }

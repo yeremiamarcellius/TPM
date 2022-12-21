@@ -19,6 +19,7 @@ class CreateBooksTable extends Migration
             $table->date('PublishDate');
             $table->integer('Stock');
             $table->string('Penulis');
+            $table->string('image');
             $table->timestamps();
         });
     }
