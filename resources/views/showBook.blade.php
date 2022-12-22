@@ -10,6 +10,8 @@
       <h6 class="card-subtitle mb-2 text-muted">{{$book->Penulis}}</h6>
       <p class="card-text">{{$book->PublishDate}}</p>
       <p class="card-text">{{$book->Stock}}</p>
+      <p class="card-text">{{$book->category->nama}}</p>
+
       <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a>
     </div>

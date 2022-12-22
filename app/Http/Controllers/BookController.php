@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     public function create(){
-        return view('createBook');
+        $categories = Category::all();
+
+        return view('createBook', compact('categories'));
     }
 
     public function store(Request $request){
+        $validated = $request->validate([
+            'Judul' => 'required|unique:books|min:5|max:255',
+            'PublishDate' => 'required',
+            'Author' => 'required',
+            'Stock' => 'required|integer|min:5',
+            'image' => 'required|mimes:jpg,png'
+        ]);
+
 
         $extension = $request->file('image')->getClientOriginalExtension();
         // $filename = $request->file('image')->getClientOriginalName();
@@ -23,7 +34,8 @@ class BookController extends Controller
             'PublishDate' => $request->PublishDate,
             'Penulis' => $request->Author,
             'Stock' => $request->Stock,
-            'image' => $filename
+            'image' => $filename,
+            'category_id' => $request->category
         ]);
 
         //  'nama dari model' => $request->name dari form

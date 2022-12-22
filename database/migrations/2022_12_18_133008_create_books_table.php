@@ -20,6 +20,8 @@ class CreateBooksTable extends Migration
             $table->integer('Stock');
             $table->string('Penulis');
             $table->string('image');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

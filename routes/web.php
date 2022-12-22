@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,5 @@ Route::get('/show-book/{id}', [BookController::class, 'show'])->name('show');
 Route::get('/edit-book/{id}', [BookController::class, 'edit'])->name('edit');
 Route::patch('/update-book/{id}', [BookController::class, 'update']);
 Route::delete('/delete-book/{id}', [BookController::class, 'delete']);
+Route::get('/create-category', [CategoryController::class, 'create']);
+Route::post('/store-category', [CategoryController::class, 'store']);
