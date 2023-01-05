@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     public function create(){
+        // $this->authorize('isAdmin');
+
         $categories = Category::all();
 
         return view('createBook', compact('categories'));
